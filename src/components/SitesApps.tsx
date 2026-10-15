@@ -171,7 +171,7 @@ export default function SitesApps() {
     let zIndex = 10;
 
     // Ajustar espaçamento baseado no breakpoint
-    const spacing = isMobile ? 160 : isTablet ? 240 : 320;
+    const spacing = isMobile ? 260 : isTablet ? 240 : 320;
     const farSpacing = isMobile ? 200 : isTablet ? 300 : 400;
 
     // Card ativo
