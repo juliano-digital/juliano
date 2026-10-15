@@ -6,6 +6,7 @@ import Hero from './components/Hero';
 import Benefits from './components/Benefits';
 import Services from './components/Services';
 import SocialProof from './components/SocialProof';
+import Portfolio from './components/Portfolio';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
@@ -106,6 +107,7 @@ function App() {
       <Benefits />
       <Services />
       <SocialProof />
+      <Portfolio />
       <FAQ />
       <FinalCTA />
       <Footer />
