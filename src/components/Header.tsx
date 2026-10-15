@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 
-export default function Header() {
+interface HeaderProps {
+  solidOnTop?: boolean;
+}
+
+export default function Header({ solidOnTop = false }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const solid = solidOnTop || scrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,7 +20,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        solid
           ? 'bg-white/95 backdrop-blur-md shadow-sm'
           : 'bg-transparent'
       }`}
@@ -23,7 +28,7 @@ export default function Header() {
       <div className="container-custom">
         <nav className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2">
+          <a href="/" className="flex items-center gap-2">
             <div
               className="w-9 h-9 rounded-lg flex items-center justify-center"
               style={{ backgroundColor: 'var(--color-primary)' }}
@@ -35,31 +40,37 @@ export default function Header() {
             </div>
             <span
               className="font-bold text-xl"
-              style={{ fontFamily: 'var(--font-display)', color: scrolled ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
+              style={{ fontFamily: 'var(--font-display)', color: solid ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
             >
               DevLocal
             </span>
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            {['Soluções', 'Benefícios', 'Depoimentos', 'FAQ'].map((item) => (
+          <div className="hidden md:flex items-center gap-3 lg:gap-8">
+            {[
+              { label: 'Soluções', href: '/#soluções' },
+              { label: 'Sites/Apps', href: '/sites-apps', button: true },
+              { label: 'Benefícios', href: '/#benefícios' },
+              { label: 'Depoimentos', href: '/#depoimentos' },
+              { label: 'FAQ', href: '/#faq' },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-sm font-medium transition-colors duration-200 hover:opacity-80"
-                style={{
+                key={item.label}
+                href={item.href}
+                className={item.button ? 'btn-primary' : 'text-xs lg:text-sm font-medium transition-colors duration-200 hover:opacity-80'}
+                style={item.button ? { padding: '8px 16px', fontSize: '14px' } : {
                   fontFamily: 'var(--font-body)',
-                  color: scrolled ? 'var(--color-text)' : 'var(--color-text-inverse)',
+                  color: solid ? 'var(--color-text)' : 'var(--color-text-inverse)',
                 }}
               >
-                {item}
+                {item.label}
               </a>
             ))}
             <a
-              href="#contato"
+              href="/#contato"
               className="btn-primary"
-              style={{ padding: '10px 24px', fontSize: '14px' }}
+              style={{ padding: '8px 16px', fontSize: '14px' }}
             >
               Fale Conosco
             </a>
@@ -75,19 +86,19 @@ export default function Header() {
               className={`block w-6 h-0.5 transition-all duration-300 ${
                 menuOpen ? 'rotate-45 translate-y-2' : ''
               }`}
-              style={{ backgroundColor: scrolled ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
+              style={{ backgroundColor: solid ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
             />
             <span
               className={`block w-6 h-0.5 transition-all duration-300 ${
                 menuOpen ? 'opacity-0' : ''
               }`}
-              style={{ backgroundColor: scrolled ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
+              style={{ backgroundColor: solid ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
             />
             <span
               className={`block w-6 h-0.5 transition-all duration-300 ${
                 menuOpen ? '-rotate-45 -translate-y-2' : ''
               }`}
-              style={{ backgroundColor: scrolled ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
+              style={{ backgroundColor: solid ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
             />
           </button>
         </nav>
@@ -96,19 +107,25 @@ export default function Header() {
         {menuOpen && (
           <div className="md:hidden bg-white rounded-2xl shadow-lg p-6 mt-2 absolute left-4 right-4">
             <div className="flex flex-col gap-4">
-              {['Soluções', 'Benefícios', 'Depoimentos', 'FAQ'].map((item) => (
+              {[
+                { label: 'Soluções', href: '/#soluções' },
+                { label: 'Sites/Apps', href: '/sites-apps', button: true },
+                { label: 'Benefícios', href: '/#benefícios' },
+                { label: 'Depoimentos', href: '/#depoimentos' },
+                { label: 'FAQ', href: '/#faq' },
+              ].map((item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase()}`}
-                  className="text-base font-medium py-2"
-                  style={{ fontFamily: 'var(--font-body)', color: 'var(--color-text)' }}
+                  key={item.label}
+                  href={item.href}
+                  className={item.button ? 'btn-primary justify-center' : 'text-base font-medium py-2'}
+                  style={item.button ? undefined : { fontFamily: 'var(--font-body)', color: 'var(--color-text)' }}
                   onClick={() => setMenuOpen(false)}
                 >
-                  {item}
+                  {item.label}
                 </a>
               ))}
               <a
-                href="#contato"
+                href="/#contato"
                 className="btn-primary justify-center mt-2"
                 onClick={() => setMenuOpen(false)}
               >

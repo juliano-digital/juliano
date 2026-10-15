@@ -1,38 +1,4 @@
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
 export default function SocialProof() {
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const counters = statsRef.current?.querySelectorAll('.counter-animate');
-      counters?.forEach((counter) => {
-        const target = parseInt(counter.getAttribute('data-target') || '0');
-        const suffix = counter.getAttribute('data-suffix') || '';
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: counter,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-          onUpdate: () => {
-            (counter as HTMLElement).textContent = Math.round(obj.val) + suffix;
-          },
-        });
-      });
-    }, statsRef);
-
-    return () => ctx.revert();
-  }, []);
-
   const testimonials = [
     {
       name: 'Marcos Oliveira',
@@ -57,51 +23,9 @@ export default function SocialProof() {
     },
   ];
 
-  const stats = [
-    { value: 150, suffix: '+', label: 'Negócios atendidos' },
-    { value: 70, suffix: '%', label: 'Redução de custos com delivery' },
-    { value: 3, suffix: 'x', label: 'Mais pedidos via canal próprio' },
-    { value: 98, suffix: '%', label: 'Clientes satisfeitos' },
-  ];
-
   return (
     <section id="depoimentos" className="py-16 md:py-24" style={{ backgroundColor: 'var(--color-bg)' }}>
       <div className="container-custom">
-        {/* Stats Section */}
-        <div
-          ref={statsRef}
-          className="gsap-fade-up rounded-2xl p-8 md:p-12 mb-16 md:mb-20"
-          style={{ backgroundColor: 'var(--color-accent)' }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div
-                  className="counter-animate text-3xl md:text-4xl lg:text-5xl font-bold mb-2"
-                  data-target={stat.value}
-                  data-suffix={stat.suffix}
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    color: 'var(--color-text-inverse)',
-                  }}
-                >
-                  0{stat.suffix}
-                </div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-body)',
-                    fontSize: '0.875rem',
-                    color: 'rgba(255,255,255,0.7)',
-                    fontWeight: 500,
-                  }}
-                >
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <span className="badge badge-primary mb-4 inline-block">Prova Social</span>

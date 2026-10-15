@@ -6,14 +6,15 @@ import Hero from './components/Hero';
 import Benefits from './components/Benefits';
 import Services from './components/Services';
 import SocialProof from './components/SocialProof';
-import Portfolio from './components/Portfolio';
+import SitesApps from './components/SitesApps';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
-function App() {
+function HomePage() {
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,26 +62,6 @@ function App() {
         );
       });
 
-      // Counter animation
-      const counters = document.querySelectorAll('.counter-animate');
-      counters.forEach((counter) => {
-        const target = parseInt(counter.getAttribute('data-target') || '0');
-        const obj = { val: 0 };
-        gsap.to(obj, {
-          val: target,
-          duration: 2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: counter,
-            start: 'top 85%',
-            toggleActions: 'play none none none',
-          },
-          onUpdate: () => {
-            (counter as HTMLElement).textContent = Math.round(obj.val).toString();
-          },
-        });
-      });
-
       // Parallax for hero
       const heroBg = document.querySelector('.hero-parallax');
       if (heroBg) {
@@ -107,11 +88,34 @@ function App() {
       <Benefits />
       <Services />
       <SocialProof />
-      <Portfolio />
       <FAQ />
       <FinalCTA />
       <Footer />
     </div>
+  );
+}
+
+function SitesAppsPage() {
+  return (
+    <div className="overflow-x-hidden">
+      <Header solidOnTop />
+      <main className="pt-16 md:pt-20">
+        <SitesApps />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/sites-apps" element={<SitesAppsPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

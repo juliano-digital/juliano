@@ -248,12 +248,6 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-/* Counter animation */
-.counter-value {
-  font-family: var(--font-mono);
-  font-weight: 500;
-}
-
 /* Portfolio Carousel */
 .portfolio-card {
   will-change: transform, opacity;

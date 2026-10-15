@@ -8,7 +8,7 @@ interface Project {
   link: string;
 }
 
-export default function Portfolio() {
+export default function SitesApps() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
