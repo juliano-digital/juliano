@@ -16,10 +16,10 @@ export default function Footer() {
                 </svg>
               </div>
               <span
-                className="font-bold text-xl"
+                className="font-bold text-lg"
                 style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text-inverse)' }}
               >
-                DevLocal
+                DevLocal — Desenvolvimento Digital
               </span>
             </div>
             <p
@@ -192,7 +192,7 @@ export default function Footer() {
               color: 'rgba(255,255,255,0.4)',
             }}
           >
-            © 2024 DevLocal. Todos os direitos reservados.
+            © 2024 DevLocal — Desenvolvimento Digital. Todos os direitos reservados.
           </p>
           <div className="flex gap-6">
             {['Privacidade', 'Termos de Uso'].map((item) => (

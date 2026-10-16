@@ -39,10 +39,10 @@ export default function Header({ solidOnTop = false }: HeaderProps) {
               </svg>
             </div>
             <span
-              className="font-bold text-xl"
+              className="max-w-[190px] text-sm font-bold leading-tight md:max-w-none md:text-xl"
               style={{ fontFamily: 'var(--font-display)', color: solid ? 'var(--color-text)' : 'var(--color-text-inverse)' }}
             >
-              DevLocal
+              DevLocal — Desenvolvimento Digital
             </span>
           </a>
 
