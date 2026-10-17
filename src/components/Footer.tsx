@@ -2,28 +2,28 @@ export default function Footer() {
   return (
     <footer style={{ backgroundColor: 'var(--color-bg-dark)' }}>
       <div className="container-custom py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid grid-cols-3 gap-3 md:gap-12 lg:grid-cols-4">
           {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
+          <div className="col-span-3 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-x-6 lg:col-span-1 lg:block">
+            <div className="flex items-center gap-2 mb-4 md:mb-0 lg:mb-4">
               <div
                 className="w-9 h-9 rounded-lg flex items-center justify-center"
-                style={{ backgroundColor: 'var(--color-primary)' }}
+                style={{ backgroundColor: 'var(--color-primary-light)' }}
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-dark)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="16 18 22 12 16 6" />
                   <polyline points="8 6 2 12 8 18" />
                 </svg>
               </div>
               <span
-                className="font-bold text-lg"
+                className="font-bold text-sm md:text-base lg:text-lg"
                 style={{ fontFamily: 'var(--font-display)', color: 'var(--color-text-inverse)' }}
               >
                 DevLocal — Desenvolvimento Digital
               </span>
             </div>
             <p
-              className="mb-6"
+              className="mb-6 md:mb-0 lg:mb-6"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.875rem',
@@ -35,7 +35,7 @@ export default function Footer() {
               Soluções digitais sob medida para comércios locais que querem crescer, 
               vender mais e conquistar seus clientes.
             </p>
-            <div className="flex gap-3">
+            <div className="flex gap-3 md:col-start-2 md:row-span-2 md:row-start-1 md:items-center lg:col-auto lg:row-auto lg:items-start">
               {['instagram', 'whatsapp', 'linkedin'].map((social) => (
                 <a
                   key={social}
@@ -69,29 +69,26 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div>
+          <div className="min-w-0">
             <h4
-              className="mb-4"
+              className="mb-3 text-[0.65rem] leading-tight tracking-normal md:mb-4 md:text-sm md:tracking-wider"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '0.875rem',
                 fontWeight: 600,
                 color: 'var(--color-text-inverse)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
               }}
             >
               Soluções
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 md:space-y-3">
               {['Cardápio Digital', 'App de Delivery', 'Sites Institucionais', 'Agendamento Online', 'Catálogo de Produtos'].map((item) => (
                 <li key={item}>
                   <a
                     href="#"
-                    className="transition-colors duration-200 hover:text-white"
+                    className="break-words text-[0.7rem] leading-snug transition-colors duration-200 hover:text-white md:text-sm"
                     style={{
                       fontFamily: 'var(--font-body)',
-                      fontSize: '0.875rem',
                       color: 'rgba(255,255,255,0.6)',
                     }}
                   >
@@ -102,29 +99,26 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4
-              className="mb-4"
+              className="mb-3 text-[0.65rem] leading-tight tracking-normal md:mb-4 md:text-sm md:tracking-wider"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '0.875rem',
                 fontWeight: 600,
                 color: 'var(--color-text-inverse)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
               }}
             >
               Segmentos
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 md:space-y-3">
               {['Restaurantes & Delivery', 'Barbearias & Salões', 'Clínicas & Estética', 'Lojas & Varejo', 'Prestadores de Serviço'].map((item) => (
                 <li key={item}>
                   <a
                     href="#"
-                    className="transition-colors duration-200 hover:text-white"
+                    className="break-words text-[0.7rem] leading-snug transition-colors duration-200 hover:text-white md:text-sm"
                     style={{
                       fontFamily: 'var(--font-body)',
-                      fontSize: '0.875rem',
                       color: 'rgba(255,255,255,0.6)',
                     }}
                   >
@@ -135,44 +129,42 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h4
-              className="mb-4"
+              className="mb-3 text-[0.65rem] leading-tight tracking-normal md:mb-4 md:text-sm md:tracking-wider"
               style={{
                 fontFamily: 'var(--font-display)',
-                fontSize: '0.875rem',
                 fontWeight: 600,
                 color: 'var(--color-text-inverse)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.05em',
               }}
             >
               Contato
             </h4>
-            <ul className="space-y-3">
-              <li className="flex items-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <ul className="space-y-2 md:space-y-3">
+              <li className="flex items-start gap-1 md:gap-2">
+                <svg className="mt-0.5 h-3 w-3 flex-shrink-0 md:h-4 md:w-4" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>
+                <span className="min-w-0 break-words text-[0.7rem] leading-snug md:text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.6)' }}>
                   (11) 99999-9999
                 </span>
               </li>
-              <li className="flex items-center gap-2">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <li className="flex items-start gap-1 md:gap-2">
+                <svg className="mt-0.5 h-3 w-3 flex-shrink-0 md:h-4 md:w-4" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>
+                <span className="min-w-0 break-words text-[0.7rem] leading-snug md:text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.6)' }}>
                   contato@devlocal.com.br
                 </span>
               </li>
-              <li className="flex items-start gap-2 mt-4">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 flex-shrink-0">
+              <li className="mt-3 flex items-start gap-1 md:mt-4 md:gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-light)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-3 w-3 flex-shrink-0 md:h-4 md:w-4">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                   <circle cx="12" cy="10" r="3" />
                 </svg>
-                <span style={{ fontFamily: 'var(--font-body)', fontSize: '0.875rem', color: 'rgba(255,255,255,0.6)' }}>
+                <span className="min-w-0 break-words text-[0.7rem] leading-snug md:text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.6)' }}>
                   Atendimento 100% online<br />para todo o Brasil
                 </span>
               </li>

@@ -18,6 +18,7 @@ export default function FinalCTA() {
   const [submitted, setSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [notificationError, setNotificationError] = useState<string | null>(null);
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({ ...formData, state: e.target.value });
@@ -60,8 +61,21 @@ export default function FinalCTA() {
       if (error) throw error;
 
       setSubmitted(true);
-    } catch (err: any) {
-      setSaveError(err.message || 'Erro ao salvar lead. Tente novamente.');
+      try {
+        const { error: emailError } = await supabase.functions.invoke('send-lead-notification', {
+          body: formData,
+        });
+
+        if (emailError) throw emailError;
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : 'Erro desconhecido.';
+        setNotificationError(
+          `Seu pedido foi salvo, mas não conseguimos notificar a equipe por e-mail. Não envie novamente. ${message}`
+        );
+      }
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Erro desconhecido.';
+      setSaveError(`Erro ao salvar lead. Tente novamente. ${message}`);
     } finally {
       setSaving(false);
     }
@@ -189,8 +203,17 @@ export default function FinalCTA() {
                       color: 'var(--color-text-muted)',
                     }}
                   >
-                    Em até 24h entraremos em contato pelo WhatsApp. Fique atento!
+                    Formulário enviado com sucesso. Em breve, um membro da nossa equipe entrará em contato.
                   </p>
+                  {notificationError && (
+                    <p
+                      role="alert"
+                      className="mt-4 text-sm text-amber-700"
+                      style={{ fontFamily: 'var(--font-body)' }}
+                    >
+                      {notificationError}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <form
@@ -229,6 +252,7 @@ export default function FinalCTA() {
                       <input
                         type="text"
                         required
+                        maxLength={120}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
@@ -255,6 +279,7 @@ export default function FinalCTA() {
                       <input
                         type="text"
                         required
+                        maxLength={160}
                         value={formData.business}
                         onChange={(e) => setFormData({ ...formData, business: e.target.value })}
                         className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
@@ -330,6 +355,7 @@ export default function FinalCTA() {
                       <input
                         type="text"
                         required
+                        maxLength={120}
                         value={formData.city}
                         onChange={handleCityChange}
                         className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
@@ -351,6 +377,7 @@ export default function FinalCTA() {
                         O que precisa? (opcional)
                       </label>
                       <textarea
+                        maxLength={2000}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2 resize-none"

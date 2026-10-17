@@ -1,0 +1,4 @@
+project_id = "bncxjzqofcoiijfjsdad"
+
+[functions.send-lead-notification]
+verify_jwt = true
