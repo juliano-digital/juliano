@@ -76,6 +76,15 @@ export default function Header({ solidOnTop = false }: HeaderProps) {
             </a>
           </div>
 
+          {/* Mobile: button "Projetos" ao lado do hamburguer (mesmo estilo do Sites/Apps) */}
+          <a
+            href="/sites-apps"
+            className="btn-primary md:hidden flex items-center gap-2"
+            style={{ padding: '8px 16px', fontSize: '14px' }}
+          >
+            Projetos
+          </a>
+
           {/* Mobile Menu Button */}
           <button
             className="md:hidden flex flex-col gap-1.5 p-2"
