@@ -1,17 +1,70 @@
 import { useState } from 'react';
+import { supabase } from '../lib/supabase';
+
+const ESTADOS_BRASIL = [
+  'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MG', 'MS',
+  'MT', 'PA', 'PB', 'PE', 'PI', 'PR', 'RJ', 'RN', 'RO', 'RR', 'RS', 'SC', 'SE', 'SP', 'TO',
+];
 
 export default function FinalCTA() {
   const [formData, setFormData] = useState({
     name: '',
     business: '',
     phone: '',
+    state: '',
+    city: '',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({ ...formData, state: e.target.value });
+  };
+
+  const handleCityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, city: e.target.value });
+  };
+
+  // Máscara do WhatsApp: permite apenas dígitos, formata como 00 000000000 (max 11 dígitos)
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, ''); // remove tudo que não é dígito
+    if (value.length > 11) value = value.slice(0, 11); // tranca em 11 dígitos (DDD + número)
+
+    let masked = value;
+    if (value.length > 2) {
+      masked = value.slice(0, 2) + ' ' + value.slice(2);
+    }
+
+    setFormData({ ...formData, phone: masked });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSaving(true);
+    setSaveError(null);
+
+    try {
+      const { error } = await supabase.from('leads').insert([
+        {
+          name: formData.name,
+          business: formData.business,
+          phone: formData.phone,
+          state: formData.state,
+          city: formData.city,
+          message: formData.message,
+        },
+      ]);
+
+      if (error) throw error;
+
+      setSubmitted(true);
+    } catch (err: any) {
+      setSaveError(err.message || 'Erro ao salvar lead. Tente novamente.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -225,11 +278,63 @@ export default function FinalCTA() {
                       <input
                         type="tel"
                         required
+                        maxLength={14}
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={handlePhoneChange}
                         className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
                         style={{ borderColor: 'var(--color-border)', fontFamily: 'var(--font-body)' }}
-                        placeholder="(11) 99999-9999"
+                        placeholder="00 000000000"
+                      />
+                    </div>
+
+                    <div>
+                      <label
+                        className="block mb-1.5"
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: '0.8125rem',
+                          fontWeight: 500,
+                          color: 'var(--color-text)',
+                        }}
+                      >
+                        Estado
+                      </label>
+                      <select
+                        required
+                        value={formData.state}
+                        onChange={handleStateChange}
+                        className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
+                        style={{ borderColor: 'var(--color-border)', fontFamily: 'var(--font-body)' }}
+                      >
+                        <option value="">Selecione o estado</option>
+                        {ESTADOS_BRASIL.map((uf) => (
+                          <option key={uf} value={uf}>
+                            {uf}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label
+                        className="block mb-1.5"
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: '0.8125rem',
+                          fontWeight: 500,
+                          color: 'var(--color-text)',
+                        }}
+                      >
+                        Cidade
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={formData.city}
+                        onChange={handleCityChange}
+                        className="w-full px-4 py-3 rounded-lg border text-sm transition-all duration-200 focus:outline-none focus:ring-2"
+                        style={{ borderColor: 'var(--color-border)', fontFamily: 'var(--font-body)' }}
+                        placeholder="Digite sua cidade"
                       />
                     </div>
 
@@ -255,25 +360,46 @@ export default function FinalCTA() {
                       />
                     </div>
 
+                    {saveError && (
+                      <p
+                        className="text-center mt-3 text-sm text-red-600 font-medium"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        ⚠️ {saveError}
+                      </p>
+                    )}
+
                     <button
                       type="submit"
-                      className="btn-secondary w-full justify-center mt-2"
+                      disabled={saving}
+                      className={`btn-secondary w-full justify-center mt-2 ${saving ? 'opacity-60 cursor-not-allowed' : ''}`}
                       style={{ padding: '14px 24px' }}
                     >
-                      <span>Quero minha demonstração grátis</span>
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12h14" />
-                        <path d="m12 5 7 7-7 7" />
-                      </svg>
+                      {saving ? (
+                        <span>Enviando...</span>
+                      ) : (
+                        <>
+                          <span>Quero minha demonstração grátis</span>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M5 12h14" />
+                            <path d="m12 5 7 7-7 7" />
+                          </svg>
+                        </>
+                      )}
                     </button>
 
+                    {submitted && (
+                      <p
+                        className="text-center mt-3 text-sm text-green-600 font-medium"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        ✅ Sua solicitação foi enviada com sucesso! Entraremos em contato em breve pelo WhatsApp.
+                      </p>
+                    )}
+
                     <p
-                      className="text-center mt-3"
-                      style={{
-                        fontFamily: 'var(--font-body)',
-                        fontSize: '0.75rem',
-                        color: 'var(--color-text-muted)',
-                      }}
+                      className="text-center mt-3 text-sm text-gray-500"
+                      style={{ fontFamily: 'var(--font-body)' }}
                     >
                       🔒 Seus dados estão seguros. Não enviamos spam.
                     </p>

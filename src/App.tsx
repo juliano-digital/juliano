@@ -10,6 +10,7 @@ import SitesApps from './components/SitesApps';
 import FAQ from './components/FAQ';
 import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
+import Admin from './pages/Admin';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -113,6 +114,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/sites-apps" element={<SitesAppsPage />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
