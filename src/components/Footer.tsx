@@ -39,10 +39,18 @@ export default function Footer() {
               {['instagram', 'whatsapp', 'linkedin'].map((social) => (
                 <a
                   key={social}
-                  href="#"
+                  href={
+                    social === 'whatsapp'
+                      ? 'https://wa.me/5551993667248'
+                      : social === 'linkedin'
+                        ? 'https://www.linkedin.com/in/juliano-araujo-957626235/'
+                        : '#'
+                  }
+                  target={social === 'instagram' ? undefined : '_blank'}
+                  rel={social === 'instagram' ? undefined : 'noopener noreferrer'}
                   className="w-9 h-9 rounded-lg flex items-center justify-center transition-all duration-200 hover:scale-110"
                   style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}
-                  aria-label={social}
+                  aria-label={social === 'whatsapp' ? 'WhatsApp' : social}
                 >
                   {social === 'instagram' && (
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -147,7 +155,7 @@ export default function Footer() {
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
                 <span className="min-w-0 break-words text-[0.7rem] leading-snug md:text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.6)' }}>
-                  (11) 99999-9999
+                  (51) 993667248
                 </span>
               </li>
               <li className="flex items-start gap-1 md:gap-2">
@@ -156,7 +164,7 @@ export default function Footer() {
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
                 <span className="min-w-0 break-words text-[0.7rem] leading-snug md:text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.6)' }}>
-                  contato@devlocal.com.br
+                  juliano@devlocal.appmodelo.com
                 </span>
               </li>
               <li className="mt-3 flex items-start gap-1 md:mt-4 md:gap-2">

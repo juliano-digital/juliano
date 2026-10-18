@@ -18,7 +18,6 @@ export default function FinalCTA() {
   const [submitted, setSubmitted] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
-  const [notificationError, setNotificationError] = useState<string | null>(null);
 
   const handleStateChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFormData({ ...formData, state: e.target.value });
@@ -68,10 +67,7 @@ export default function FinalCTA() {
 
         if (emailError) throw emailError;
       } catch (error: unknown) {
-        const message = error instanceof Error ? error.message : 'Erro desconhecido.';
-        setNotificationError(
-          `Seu pedido foi salvo, mas não conseguimos notificar a equipe por e-mail. Não envie novamente. ${message}`
-        );
+        console.error('O lead foi salvo, mas a notificação por e-mail falhou:', error);
       }
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : 'Erro desconhecido.';
@@ -205,15 +201,6 @@ export default function FinalCTA() {
                   >
                     Formulário enviado com sucesso. Em breve, um membro da nossa equipe entrará em contato.
                   </p>
-                  {notificationError && (
-                    <p
-                      role="alert"
-                      className="mt-4 text-sm text-amber-700"
-                      style={{ fontFamily: 'var(--font-body)' }}
-                    >
-                      {notificationError}
-                    </p>
-                  )}
                 </div>
               ) : (
                 <form

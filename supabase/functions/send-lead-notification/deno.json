@@ -1,5 +1,0 @@
-{
-  "imports": {
-    "hostinger-mail-api-sdk": "npm:hostinger-mail-api-sdk@1.19.6"
-  }
-}
