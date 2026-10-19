@@ -40,27 +40,7 @@ export default function SitesApps() {
       image: './img/barbeariabrasa.png',
       link: 'https://barbearia1.appmodelo.com/',
     },
-    {
-      id: 4,
-      title: 'Padaria Pão Dourado',
-      description: 'Sistema completo de encomendas online com pagamento integrado e notificações.',
-      image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&h=450&fit=crop',
-      link: '#',
-    },
-    {
-      id: 5,
-      title: 'Barbearia Old School',
-      description: 'Landing page de alta conversão com agendamento em tempo real e galeria de cortes.',
-      image: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=800&h=450&fit=crop',
-      link: '#',
-    },
-    {
-      id: 6,
-      title: 'Pet Shop Amigo Fiel',
-      description: 'E-commerce simplificado com catálogo de produtos e agendamento de banho e tosa.',
-      image: 'https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=800&h=450&fit=crop',
-      link: '#',
-    },
+  
   ];
 
   // Autoplay
