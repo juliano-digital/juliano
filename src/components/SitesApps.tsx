@@ -21,24 +21,24 @@ export default function SitesApps() {
   const projects: Project[] = [
     {
       id: 1,
-      title: 'Pizzaria Don Corleone',
-      description: 'App de delivery completo com cardápio digital, gestão de pedidos e integração WhatsApp.',
-      image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&h=450&fit=crop',
-      link: '#',
+      title: 'Padaria Online',
+      description: 'Para pedir no conforto de casa,App de delivery cardápio digital, gestão de pedidos.',
+      image: '/img/appmodelo.png',
+      link: 'https://appmodelo.com',
     },
     {
       id: 2,
-      title: 'Studio Bella Forma',
-      description: 'Site institucional com sistema de agendamento online e lembretes automáticos.',
-      image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&h=450&fit=crop',
-      link: '#',
+      title: 'Gestão Padaria Online',
+      description: 'Painel completo para gestão e fidelização de clientes.',
+      image: './img/appmodelogestao.png',
+      link: 'https://appmodelo.com/admin',
     },
     {
       id: 3,
-      title: 'Auto Peças Central',
-      description: 'Catálogo online com chatbot de atendimento e controle de estoque integrado.',
-      image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&h=450&fit=crop',
-      link: '#',
+      title: 'Barbearia BRASA, Plataforma Web & Agendamento ',
+      description: 'Desenvolvimento do site oficial e hub digital da Barbearia BRASA.',
+      image: './img/barbeariabrasa.png',
+      link: 'https://barbearia1.appmodelo.com/',
     },
     {
       id: 4,
@@ -316,15 +316,14 @@ export default function SitesApps() {
                 {/* Card Content */}
                 <div className="relative h-full flex flex-col">
                   {/* Image */}
-                  <div className="relative aspect-video overflow-hidden rounded-t-2xl">
+                  <div className="relative aspect-video overflow-hidden rounded-t-2xl bg-white">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full"
+                      style={{ objectFit: 'contain' }}
                       loading="lazy"
                     />
-                    {/* Overlay gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a2e] via-transparent to-transparent opacity-60" />
                   </div>
 
                   {/* Content */}
@@ -333,7 +332,7 @@ export default function SitesApps() {
                       className="mb-3"
                       style={{
                         fontFamily: 'var(--font-display)',
-                        fontSize: '1.25rem',
+                        fontSize: '1rem',
                         fontWeight: 700,
                         background: 'linear-gradient(135deg, #fff 0%, #b7e4c7 100%)',
                         WebkitBackgroundClip: 'text',
@@ -348,11 +347,11 @@ export default function SitesApps() {
                       className="mb-4 flex-1"
                       style={{
                         fontFamily: 'var(--font-body)',
-                        fontSize: '0.875rem',
-                        color: 'rgba(255,255,255,0.7)',
+                        fontSize: '0.8rem',
+                        color: '#fff',
                         lineHeight: '1.6',
                         display: '-webkit-box',
-                        WebkitLineClamp: 3,
+                        WebkitLineClamp: 4,
                         WebkitBoxOrient: 'vertical',
                         overflow: 'hidden',
                       }}
