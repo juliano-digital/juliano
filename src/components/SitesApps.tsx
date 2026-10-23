@@ -31,7 +31,7 @@ export default function SitesApps() {
       title: 'Gestão Padaria Online',
       description: 'Painel completo para gestão e fidelização de clientes.',
       image: './img/appmodelogestao.png',
-      link: 'https://appmodelo.com/admin',
+      link: 'https://appmodelo.com/#/admin',
     },
     {
       id: 3,
