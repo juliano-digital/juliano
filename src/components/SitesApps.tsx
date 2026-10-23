@@ -41,6 +41,14 @@ export default function SitesApps() {
       link: 'https://barbearia1.appmodelo.com/',
     },
   
+     {
+      id: 4,
+      title: ' Aplicativo de Controle Financeiro e Gestão de Despesas ',
+      description: 'Aplicativo de gestão financeira desenvolvido para registrar despesas, acompanhar compras, controlar parcelas e organizar os gastos mensais.',
+      image: './img/iconfinancas1.png',
+      link: 'https://financas1.appmodelo.com/',
+    },
+
   ];
 
   // Autoplay
